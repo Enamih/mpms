@@ -11,7 +11,7 @@ const projects = {
       "/usce/usce-tower-2-1.jpg",
     ],
     sr: {
-      title: "UŠĆE Tower II",
+      title: "Ušće Kula 2",
       category: "Poslovni objekat",
       facts: [
         { label: "Lokacija", value: "Novi Beograd" },
@@ -26,8 +26,8 @@ const projects = {
         { value: "A+", label: "Klasa objekta" },
       ],
       description: [
-        "UŠĆE Tower II predstavlja jednu od najreprezentativnijih poslovnih zgrada nove generacije u Beogradu i važan deo poslovnog kompleksa UŠĆE na Novom Beogradu. Sa visinom od 103,9 metara i ukupnom bruto površinom od oko 55.000 m², objekat objedinjuje približno 27.400 m² kancelarijskog prostora i dve podzemne etaže sa oko 750 parking mesta, koje koriste obe kule u kompleksu.",
-        "Projektovan kao poslovna zgrada A+ klase, objekat karakteriše savremena arhitektura sa potpuno zastakljenom fasadom, otvorenim kancelarijskim etažama i visokim stepenom fleksibilnosti u organizaciji prostora. Posebna pažnja posvećena je energetskoj efikasnosti, održivosti i kvalitetu unutrašnjeg radnog okruženja, uz primenu savremenih tehničkih sistema upravljanja objektom i visokih standarda izgradnje. Zahvaljujući spoju arhitektonske estetike, funkcionalnosti i savremenih građevinskih rešenja, UŠĆE Tower II predstavlja jedan od najznačajnijih poslovnih objekata u Srbiji.",
+        "Ušće Kula 2 predstavlja jednu od najreprezentativnijih poslovnih zgrada nove generacije u Beogradu i važan deo poslovnog kompleksa UŠĆE na Novom Beogradu. Sa visinom od 103,9 metara i ukupnom bruto površinom od oko 55.000 m², objekat objedinjuje približno 27.400 m² kancelarijskog prostora i dve podzemne etaže sa oko 750 parking mesta, koje koriste obe kule u kompleksu.",
+        "Projektovan kao poslovna zgrada A+ klase, objekat karakteriše savremena arhitektura sa potpuno zastakljenom fasadom, otvorenim kancelarijskim etažama i visokim stepenom fleksibilnosti u organizaciji prostora. Posebna pažnja posvećena je energetskoj efikasnosti, održivosti i kvalitetu unutrašnjeg radnog okruženja, uz primenu savremenih tehničkih sistema upravljanja objektom i visokih standarda izgradnje. Zahvaljujući spoju arhitektonske estetike, funkcionalnosti i savremenih građevinskih rešenja, Ušće Kula 2 predstavlja jedan od najznačajnijih poslovnih objekata u Srbiji.",
       ],
     },
     en: {
@@ -335,6 +335,11 @@ const projects = {
       "/expo/expo-1-1920x980.jpg",
       "/expo/expo-3-960x860.jpg",
       "/expo/expo-thumb-580x720.jpg",
+      "/expo/image0.jpeg",
+      "/expo/image1.jpeg",
+      "/expo/image2.jpeg",
+      "/expo/image3.jpeg",
+      "/expo/image4.jpeg"
     ],
     sr: {
       title: "EXPO 2027",
@@ -381,6 +386,9 @@ const projects = {
       "/nacionalni-stadion/nacionalni-stadion-1-1920x980.jpg",
       "/nacionalni-stadion/nacionalni-stadion-3-960x860.jpg",
       "/nacionalni-stadion/nacionalni-stadion-thumb-580x720.jpg",
+      "/nacionalni-stadion/image5.jpeg",
+      "/nacionalni-stadion/image6.jpeg",
+      "/nacionalni-stadion/image7.jpeg",
     ],
     sr: {
       title: "Nacionalni stadion",
