@@ -1,0 +1,158 @@
+.footer {
+  background: linear-gradient(135deg, #151515 0%, #0f0f0f 55%, #1f1f1f 100%);
+  color: #ffffff;
+  margin-top: 70px;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 42px 5%;
+  display: grid;
+  grid-template-columns: 1.45fr 0.7fr 1fr 1fr 0.7fr;
+  gap: 26px;
+  align-items: start;
+}
+
+.footer-company h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.footer-company p {
+  margin: 10px 0 0;
+  color: #bdbdbd;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-nav a,
+.footer-office a {
+  color: #d6d6d6;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.25s ease;
+}
+
+.footer-nav a:hover,
+.footer-office a:hover {
+  color: #c40000;
+}
+
+.footer-office h3 {
+  margin: 0 0 10px;
+  color: #c40000;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.footer-office p {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.footer-office a {
+  display: block;
+  margin-bottom: 7px;
+}
+
+.footer-linkedin {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.linkedin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 19px;
+  border: 1px solid #c40000;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  transition: 0.25s ease;
+  white-space: nowrap;
+}
+
+.linkedin-btn:hover {
+  background: #c40000;
+  box-shadow: 0 0 24px rgba(196, 0, 0, 0.24);
+}
+
+.footer-bottom {
+  border-top: 1px solid #252525;
+  padding: 15px 5%;
+  text-align: center;
+  color: #8a8a8a;
+  font-size: 12px;
+}
+
+@media (min-width: 1051px) {
+  .footer-linkedin {
+    transform: translateX(-70px);
+  }
+}
+
+@media (max-width: 1050px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 50px;
+  }
+
+  .footer-linkedin {
+    justify-content: flex-start;
+    transform: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .footer {
+    margin-top: 48px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    padding: 36px 24px;
+    gap: 28px;
+    text-align: center;
+  }
+
+  .footer-nav {
+    align-items: center;
+  }
+
+  .footer-linkedin {
+    justify-content: center;
+    transform: none;
+  }
+
+  .footer-company h2 {
+    font-size: 21px;
+  }
+
+  .footer-company p,
+  .footer-nav a,
+  .footer-office a,
+  .footer-office p {
+    font-size: 13px;
+  }
+
+  .footer-bottom {
+    padding: 15px 20px;
+    font-size: 11px;
+  }
+}
