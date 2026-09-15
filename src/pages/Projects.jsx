@@ -4,7 +4,7 @@ import useLanguage from "../hooks/useLanguage";
 const projects = [
   {
     slug: "usce",
-    title: { sr: "Tower 2. Ušće Beograd", en: "UŠĆE Tower II Belgrade" },
+    title: { sr: "Ušće Kula 2 Beograd", en: "Ušće Tower II Belgrade" },
     category: { sr: "Poslovni objekat", en: "Office building" },
     location: { sr: "Beograd", en: "Belgrade" },
     image: "/usce/usce-1.jpg",

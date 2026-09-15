@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useLanguage from "../hooks/useLanguage";
 import "./ProjectDetails.css";
 
@@ -461,6 +461,8 @@ function ProjectDetails() {
   const { language } = useLanguage();
   const projectSource = projects[slug];
   const [activeImageIndex, setActiveImageIndex] = useState(null);
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
   const t = uiText[language];
 
   if (!projectSource) {
@@ -482,6 +484,35 @@ function ProjectDetails() {
   const nextImage = () => {
     setActiveImageIndex((current) => (current === images.length - 1 ? 0 : current + 1));
   };
+
+  const handleTouchStart = (event) => {
+  touchStartX.current = event.changedTouches[0].clientX;
+};
+
+const handleTouchMove = (event) => {
+  touchEndX.current = event.changedTouches[0].clientX;
+};
+
+const handleTouchEnd = () => {
+  if (touchStartX.current === null || touchEndX.current === null) {
+    return;
+  }
+
+  const distance = touchStartX.current - touchEndX.current;
+
+  const minSwipeDistance = 50;
+
+  if (distance > minSwipeDistance) {
+    nextImage();
+  }
+
+  if (distance < -minSwipeDistance) {
+    previousImage();
+  }
+
+  touchStartX.current = null;
+  touchEndX.current = null;
+};
 
   return (
     <main className="project-details-page">
@@ -569,51 +600,61 @@ function ProjectDetails() {
       </section>
 
       {activeImageIndex !== null && (
-        <div className="project-lightbox" onClick={() => setActiveImageIndex(null)}>
-          <button
-            type="button"
-            className="project-lightbox-close"
-            onClick={() => setActiveImageIndex(null)}
-            aria-label="Close"
-          >
-            ×
-          </button>
+  <div
+    className="project-lightbox"
+    onClick={() => setActiveImageIndex(null)}
+    onTouchStart={handleTouchStart}
+    onTouchMove={handleTouchMove}
+    onTouchEnd={handleTouchEnd}
+  >
+    <button
+      type="button"
+      className="project-lightbox-close"
+      onClick={() => setActiveImageIndex(null)}
+      aria-label="Close"
+    >
+      ×
+    </button>
 
-          <button
-            type="button"
-            className="project-lightbox-arrow project-lightbox-prev"
-            onClick={(event) => {
-              event.stopPropagation();
-              previousImage();
-            }}
-            aria-label="Previous"
-          >
-            ‹
-          </button>
+    <button
+      type="button"
+      className="project-lightbox-arrow project-lightbox-prev"
+      onClick={(event) => {
+        event.stopPropagation();
+        previousImage();
+      }}
+      aria-label="Previous"
+    >
+      ‹
+    </button>
 
-          <img
-            src={images[activeImageIndex]}
-            alt={project.title}
-            onClick={(event) => event.stopPropagation()}
-          />
+    <img
+      src={images[activeImageIndex]}
+      alt={project.title}
+      draggable="false"
+      onClick={(event) => event.stopPropagation()}
+    />
 
-          <button
-            type="button"
-            className="project-lightbox-arrow project-lightbox-next"
-            onClick={(event) => {
-              event.stopPropagation();
-              nextImage();
-            }}
-            aria-label="Next"
-          >
-            ›
-          </button>
+    <button
+      type="button"
+      className="project-lightbox-arrow project-lightbox-next"
+      onClick={(event) => {
+        event.stopPropagation();
+        nextImage();
+      }}
+      aria-label="Next"
+    >
+      ›
+    </button>
 
-          <div className="project-lightbox-counter">
-            {activeImageIndex + 1} / {images.length}
-          </div>
-        </div>
-      )}
+    <div
+      className="project-lightbox-counter"
+      onClick={(event) => event.stopPropagation()}
+    >
+      {activeImageIndex + 1} / {images.length}
+    </div>
+  </div>
+)}
     </main>
   );
 }

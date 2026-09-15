@@ -563,3 +563,13 @@
     border-radius: 10px;
   }
 }
+
+.project-lightbox {
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.project-lightbox img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
