@@ -22,7 +22,7 @@ const content = {
     approach: [
       ["Planiranje", "Detaljna analiza projekta i definisanje svih faza realizacije."],
       ["Izvođenje", "Efikasna organizacija gradilišta i koordinacija svih učesnika."],
-      ["Kontrola kvaliteta", "Kontinučan nadzor i primena najviših standarda kvaliteta."],
+      ["Kontrola kvaliteta", "Kontinuiran nadzor i primena najviših standarda kvaliteta."],
       ["Realizacija", "Završetak projekta u skladu sa ugovorenim rokovima i zahtevima investitora."],
     ],
   },

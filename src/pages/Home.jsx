@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useLanguage from "../hooks/useLanguage";
+import { useEffect, useRef } from "react";
 
 const content = {
   sr: {
@@ -54,14 +55,43 @@ const content = {
 
 function Home() {
   const { language } = useLanguage();
+  const heroVideoRef = useRef(null);
+
+useEffect(() => {
+  const video = heroVideoRef.current;
+
+  if (!video) return;
+
+  video.muted = true;
+  video.defaultMuted = true;
+
+  const playVideo = async () => {
+    try {
+      await video.play();
+    } catch (error) {
+      console.log("Autoplay nije pokrenut:", error);
+    }
+  };
+
+  playVideo();
+}, []);
   const t = content[language];
 
   return (
     <main>
       <section id="pocetna" className="hero">
-        <video className="hero-video" autoPlay muted loop playsInline>
-          <source src="/hero-vid.mp4" type="video/mp4" />
-        </video>
+        <video
+  ref={heroVideoRef}
+  className="hero-video"
+  autoPlay
+  muted
+  playsInline
+  loop
+  preload="auto"
+  poster="/home-hero.jpg"
+>
+  <source src="/hero-vid.mp4" type="video/mp4" />
+</video>
 
         <div className="hero-overlay"></div>
 

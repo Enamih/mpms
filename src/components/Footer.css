@@ -1,5 +1,11 @@
 .footer {
-  background: linear-gradient(135deg, #151515 0%, #0f0f0f 55%, #1f1f1f 100%);
+  background: linear-gradient(
+    135deg,
+    #151515 0%,
+    #0f0f0f 55%,
+    #1f1f1f 100%
+  );
+
   color: #ffffff;
   margin-top: 70px;
 }
@@ -7,38 +13,53 @@
 .footer-container {
   max-width: 1400px;
   margin: 0 auto;
+
   padding: 42px 5%;
+
   display: grid;
   grid-template-columns: 1.45fr 0.7fr 1fr 1fr 0.7fr;
   gap: 26px;
+
   align-items: start;
 }
 
+/* COMPANY */
+
 .footer-company h2 {
   margin: 0;
+
   font-size: 24px;
   font-weight: 800;
+
   color: #ffffff;
 }
 
 .footer-company p {
   margin: 10px 0 0;
+
   color: #bdbdbd;
+
   font-size: 14px;
   line-height: 1.65;
 }
 
+/* NAVIGATION */
+
 .footer-nav {
   display: flex;
   flex-direction: column;
+
   gap: 10px;
 }
 
 .footer-nav a,
 .footer-office a {
   color: #d6d6d6;
+
   text-decoration: none;
+
   font-size: 14px;
+
   transition: color 0.25s ease;
 }
 
@@ -47,18 +68,25 @@
   color: #c40000;
 }
 
+/* OFFICES */
+
 .footer-office h3 {
   margin: 0 0 10px;
+
   color: #c40000;
+
   font-size: 14px;
   font-weight: 800;
+
   text-transform: uppercase;
   letter-spacing: 0.8px;
 }
 
 .footer-office p {
   margin: 0 0 8px;
+
   color: #ffffff;
+
   font-size: 14px;
   font-weight: 600;
   line-height: 1.5;
@@ -66,8 +94,29 @@
 
 .footer-office a {
   display: block;
+
   margin-bottom: 7px;
 }
+
+/* CLICKABLE ADDRESS */
+
+.footer-address {
+  color: #ffffff !important;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.footer-address:hover {
+  color: #c40000 !important;
+}
+
+/* LINKEDIN */
 
 .footer-linkedin {
   display: flex;
@@ -76,58 +125,91 @@
 
 .linkedin-btn {
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
+
   padding: 11px 19px;
+
   border: 1px solid #c40000;
+
   color: #ffffff;
+
   text-decoration: none;
+
   font-size: 13px;
   font-weight: 700;
-  transition: 0.25s ease;
+
   white-space: nowrap;
+
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
 }
 
 .linkedin-btn:hover {
   background: #c40000;
+
   box-shadow: 0 0 24px rgba(196, 0, 0, 0.24);
+
+  transform: translateY(-2px);
 }
+
+/* BOTTOM */
 
 .footer-bottom {
   border-top: 1px solid #252525;
+
   padding: 15px 5%;
+
   text-align: center;
+
   color: #8a8a8a;
+
   font-size: 12px;
 }
-.footer-address {
-  color: #ffffff !important;
-  font-weight: 600;
-  cursor: pointer;
-  transition: color 0.25s ease;
-}
 
-.footer-address:hover {
-  color: #c40000 !important;
-}
+/* DESKTOP */
 
 @media (min-width: 1051px) {
+  /*
+    Pomeramo navigaciju malo udesno kako bi razmaci
+    između svih footer kolona bili ravnomerniji.
+  */
+  .footer-nav {
+    transform: translateX(45px);
+  }
+
+  /*
+    LinkedIn ostaje pomeren ulevo kao što smo prethodno podesili.
+  */
   .footer-linkedin {
     transform: translateX(-70px);
   }
 }
 
+/* TABLET */
+
 @media (max-width: 1050px) {
   .footer-container {
     grid-template-columns: repeat(2, 1fr);
+
     gap: 32px 50px;
+  }
+
+  .footer-nav {
+    transform: none;
   }
 
   .footer-linkedin {
     justify-content: flex-start;
+
     transform: none;
   }
 }
+
+/* MOBILE */
 
 @media (max-width: 700px) {
   .footer {
@@ -136,17 +218,23 @@
 
   .footer-container {
     grid-template-columns: 1fr;
+
     padding: 36px 24px;
+
     gap: 28px;
+
     text-align: center;
   }
 
   .footer-nav {
     align-items: center;
+
+    transform: none;
   }
 
   .footer-linkedin {
     justify-content: center;
+
     transform: none;
   }
 
@@ -163,6 +251,7 @@
 
   .footer-bottom {
     padding: 15px 20px;
+
     font-size: 11px;
   }
 }

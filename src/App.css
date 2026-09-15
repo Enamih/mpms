@@ -78,13 +78,18 @@ main {
 
 .hero {
   position: relative;
-  min-height: calc(100vh - 96px);
+
+  height: 72vh;
+  min-height: 590px;
+  max-height: 720px;
+
   display: flex;
   align-items: center;
-  overflow: hidden;
-  padding: 86px 5%;
-}
 
+  overflow: hidden;
+
+  padding: 55px 5%;
+}
 .hero-video {
   position: absolute;
   inset: 0;
@@ -1375,5 +1380,41 @@ main {
     translate: 0 0;
     scale: 1;
     transition: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .stats-section {
+    position: relative;
+    margin-top: 0;
+    top: auto;
+    transform: none;
+
+    padding: 30px 20px 30px;
+
+    background: #f3f3f3;
+  }
+
+  .stats-grid {
+    position: relative;
+    margin-top: 0;
+    top: auto;
+    transform: none;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 14px;
+
+    width: 100%;
+  }
+
+  .stat-card {
+    margin: 0;
+    min-height: 135px;
+
+    padding: 24px 20px;
+
+    border-radius: 14px;
   }
 }
