@@ -43,21 +43,47 @@ function Footer() {
           <Link to="/projekti">{t.projects}</Link>
           <Link to="/kontakt">{t.contact}</Link>
         </nav>
+<div className="footer-office">
+  <h3>Novi Sad</h3>
 
-        <div className="footer-office">
-          <h3>Novi Sad</h3>
-          <p>Bulevar Slobodana Jovanovića 15</p>
-          <a href="tel:+38169685607">(+381) 069/685-607</a>
-          <a href="mailto:office@mpms.rs">office@mpms.rs</a>
-        </div>
+  <a
+    href="https://www.google.com/maps/search/?api=1&query=Bulevar+Slobodana+Jovanovica+15,+Novi+Sad"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="footer-address"
+  >
+    Bulevar Slobodana Jovanovića 15
+  </a>
 
-        <div className="footer-office">
-          <h3>{t.belgrade}</h3>
-          <p>Dr. Ivana Ribara 128</p>
-          <a href="tel:+381113426525">011/342-6525</a>
-          <a href="mailto:office@mpms.rs">office@mpms.rs</a>
-        </div>
+  <a href="tel:+38169685607">
+    (+381) 069/685-607
+  </a>
 
+  <a href="mailto:office@mpms.rs">
+    office@mpms.rs
+  </a>
+</div>
+
+<div className="footer-office">
+  <h3>Beograd</h3>
+
+  <a
+    href="https://www.google.com/maps/search/?api=1&query=Dr.+Ivana+Ribara+128,+Beograd"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="footer-address"
+  >
+    Dr. Ivana Ribara 128
+  </a>
+
+  <a href="tel:+381113426525">
+    011/342-6525
+  </a>
+
+  <a href="mailto:office@mpms.rs">
+    office@mpms.rs
+  </a>
+</div>
         <div className="footer-linkedin">
           <a
             href="https://linkedin.com"
