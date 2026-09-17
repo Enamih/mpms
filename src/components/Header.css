@@ -1,22 +1,81 @@
+/* =========================================================
+   HEADER
+========================================================= */
+
 .header {
   width: 100%;
   height: 96px;
+
   padding: 0 5%;
 
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
 
-  background: rgba(255, 255, 255, 0.98);
-  border-bottom: 1px solid #eeeeee;
-
   position: sticky;
   top: 0;
+
   z-index: 5000;
 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.96);
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.045);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.04),
+    0 1px 0 rgba(196, 0, 0, 0.025);
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
+
+
+/* =========================================================
+   DISKRETNA CRVENA LINIJA ISPOD HEADERA
+========================================================= */
+
+.header::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  transform: translateX(-50%);
+
+  width: 58%;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(196, 0, 0, 0.08) 15%,
+    rgba(196, 0, 0, 0.32) 35%,
+    rgba(196, 0, 0, 0.72) 50%,
+    rgba(196, 0, 0, 0.32) 65%,
+    rgba(196, 0, 0, 0.08) 85%,
+    transparent 100%
+  );
+
+  box-shadow:
+    0 0 8px rgba(196, 0, 0, 0.12);
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.25s ease;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
 
 .logo {
   justify-self: start;
@@ -25,90 +84,222 @@
   align-items: center;
 
   position: relative;
+
   z-index: 5100;
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
+
+
+.logo:hover {
+  transform: translateY(-1px);
+}
+
 
 .logo img {
   width: auto;
   height: 67px;
+
   display: block;
 }
 
-/* DESKTOP NAVIGATION */
+
+/* =========================================================
+   DESKTOP NAVIGATION
+========================================================= */
 
 .nav {
+  position: relative;
+
   display: flex;
   align-items: center;
-  gap: 52px;
+
+  gap: 34px;
+
+  padding: 0 10px;
 }
+
+
+/* BLAGI GLOW IZA NAVIGACIJE */
+
+.nav::before {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 115%;
+  height: 64px;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(196, 0, 0, 0.035),
+      transparent 70%
+    );
+
+  filter: blur(15px);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
 
 .nav a {
   position: relative;
 
-  padding: 35px 0 32px;
+  z-index: 1;
+
+  padding: 12px 14px;
 
   color: #181818;
+
   text-decoration: none;
 
   font-size: 17px;
   font-weight: 700;
+
   letter-spacing: -0.15px;
 
-  transition: color 0.25s ease;
+  border-radius: 9px;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
+
+
+.nav a:hover {
+  color: #c90000;
+
+  background:
+    rgba(201, 0, 0, 0.045);
+
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0 7px 18px
+    rgba(196, 0, 0, 0.055);
+}
+
+
+.nav a.active {
+  color: #c90000;
+}
+
+
+/* CRVENA LINIJA ISPOD LINKA */
 
 .nav a::after {
   content: "";
 
   position: absolute;
-  left: 0;
-  bottom: 24px;
 
-  width: 100%;
+  left: 14px;
+  right: 14px;
+
+  bottom: 5px;
+
   height: 2px;
+
+  border-radius: 10px;
 
   background: #c90000;
 
+  box-shadow:
+    0 0 8px
+    rgba(201, 0, 0, 0.2);
+
   transform: scaleX(0);
+
   transform-origin: right;
 
-  transition: transform 0.3s ease;
+  transition:
+    transform 0.3s ease;
 }
 
-.nav a:hover,
-.nav a.active {
-  color: #c90000;
-}
 
 .nav a:hover::after,
 .nav a.active::after {
   transform: scaleX(1);
+
   transform-origin: left;
 }
 
-/* DESKTOP RIGHT SIDE */
+
+/* =========================================================
+   HEADER RIGHT SIDE
+========================================================= */
 
 .header-actions {
   justify-self: end;
 
   display: flex;
   align-items: center;
-  gap: 24px;
+
+  gap: 18px;
 
   position: relative;
+
   z-index: 5100;
 }
+
+
+/* =========================================================
+   LANGUAGE SWITCH
+========================================================= */
 
 .language-switch {
   display: flex;
   align-items: center;
-  gap: 12px;
+
+  gap: 9px;
+
+  padding: 8px 12px;
+
+  border-radius: 10px;
+
+  background:
+    rgba(0, 0, 0, 0.024);
+
+  border:
+    1px solid
+    rgba(0, 0, 0, 0.045);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
+
+
+.language-switch:hover {
+  background:
+    rgba(196, 0, 0, 0.025);
+
+  border-color:
+    rgba(196, 0, 0, 0.08);
+}
+
 
 .language-switch button {
   padding: 0;
 
   border: none;
+
   background: transparent;
 
   color: #8c8c8c;
@@ -118,13 +309,24 @@
 
   cursor: pointer;
 
-  transition: color 0.25s ease;
+  transition:
+    color 0.25s ease,
+    text-shadow 0.25s ease;
 }
+
 
 .language-switch button:hover,
 .language-switch button.active {
   color: #c90000;
 }
+
+
+.language-switch button.active {
+  text-shadow:
+    0 0 10px
+    rgba(201, 0, 0, 0.14);
+}
+
 
 .language-switch span {
   width: 1px;
@@ -133,7 +335,10 @@
   background: #c7c7c7;
 }
 
-/* HAMBURGER */
+
+/* =========================================================
+   HAMBURGER BUTTON
+========================================================= */
 
 .menu-toggle {
   display: none;
@@ -142,24 +347,29 @@
   height: 40px;
 
   border: 0;
+
   background: transparent;
 
   padding: 7px;
 
   position: relative;
+
   z-index: 7300;
 
   cursor: pointer;
 }
 
+
 .menu-toggle span {
   position: absolute;
+
   left: 9px;
 
   width: 22px;
   height: 2px;
 
   background: #171717;
+
   border-radius: 2px;
 
   transition:
@@ -169,73 +379,130 @@
     background 0.25s ease;
 }
 
+
 .menu-toggle span:nth-child(1) {
   top: 12px;
 }
+
 
 .menu-toggle span:nth-child(2) {
   top: 19px;
 }
 
+
 .menu-toggle span:nth-child(3) {
   top: 26px;
 }
 
-/* TABLET */
+
+/* =========================================================
+   MANJI DESKTOP / TABLET
+========================================================= */
 
 @media (max-width: 1100px) {
+
   .nav {
-    gap: 32px;
+    gap: 18px;
   }
+
 
   .nav a {
     font-size: 16px;
+
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+
+
+  .nav a::after {
+    left: 11px;
+    right: 11px;
   }
 }
 
-/* MOBILE */
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
 
 @media (max-width: 900px) {
+
   .header {
     height: 76px;
-    padding: 0 18px;
 
-    grid-template-columns: 1fr auto;
+    padding:
+      0 18px;
 
-    background: rgba(255, 255, 255, 0.98);
+    grid-template-columns:
+      1fr auto;
 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background:
+      rgba(255, 255, 255, 0.98);
+
+    backdrop-filter:
+      blur(12px);
+
+    -webkit-backdrop-filter:
+      blur(12px);
   }
+
+
+  /* tanja linija na telefonu */
+
+  .header::after {
+    width: 76%;
+
+    opacity: 0.65;
+  }
+
 
   .logo {
     z-index: 5100;
   }
 
+
   .logo img {
     height: 50px;
   }
 
+
   .header-actions {
-    gap: 12px;
+    gap: 8px;
 
     position: relative;
+
     z-index: 5100;
   }
 
+
   .language-switch {
-    gap: 8px;
+    gap: 7px;
+
+    padding:
+      7px 9px;
+
+    border-radius: 8px;
   }
+
 
   .language-switch button {
     font-size: 12px;
   }
 
+
+  .language-switch span {
+    height: 12px;
+  }
+
+
   .menu-toggle {
     display: block;
   }
 
-  /* MOBILNI MENI */
+
+  /* =======================================================
+     MOBILNI POLUKRUŽNI MENI
+  ======================================================= */
 
   .nav {
     position: fixed;
@@ -244,69 +511,112 @@
     left: 0;
 
     width: 100vw;
-    height: 45dvh;
+    height: 64dvh;
 
-    /*
-      Meni je iznad headera, logotipa i stranice.
-      Ništa iza njega se ne uklanja iz DOM-a.
-    */
     z-index: 7000;
 
     overflow: hidden;
 
-    background: rgba(7, 7, 7, 0.98);
+    background:
+      rgba(7, 7, 7, 0.985);
 
     border: 0;
-    border-radius: 0 0 0 44vw;
 
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+    border-radius:
+      0 0 0 44vw;
 
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+      0 24px 70px
+      rgba(0, 0, 0, 0.4);
+
+    backdrop-filter:
+      blur(6px);
+
+    -webkit-backdrop-filter:
+      blur(6px);
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
 
-    /*
-      Bitna promena:
-      više nije justify-content:center,
-      pa linkovi ne stoje na sredini velikog prostora.
-    */
     justify-content: flex-start;
 
     gap: 5px;
 
-    /*
-      Linkovi kreću relativno brzo ispod gornjih kontrola.
-    */
-    padding: 88px 28px 28px;
+    padding:
+      88px 28px 28px;
 
-    clip-path: circle(0 at calc(100% - 28px) 28px);
+    clip-path:
+      circle(
+        0
+        at
+        calc(100% - 28px)
+        28px
+      );
 
     opacity: 0;
+
     visibility: hidden;
+
     pointer-events: none;
 
     transition:
-      clip-path 0.58s cubic-bezier(0.77, 0, 0.18, 1),
-      opacity 0.2s ease,
-      visibility 0s linear 0.58s;
+      clip-path
+        0.58s
+        cubic-bezier(
+          0.77,
+          0,
+          0.18,
+          1
+        ),
+
+      opacity
+        0.2s
+        ease,
+
+      visibility
+        0s
+        linear
+        0.58s;
   }
 
+
   .nav.nav-open {
-    clip-path: circle(145% at calc(100% - 28px) 28px);
+    clip-path:
+      circle(
+        145%
+        at
+        calc(100% - 28px)
+        28px
+      );
 
     opacity: 1;
+
     visibility: visible;
+
     pointer-events: auto;
 
     transition:
-      clip-path 0.58s cubic-bezier(0.77, 0, 0.18, 1),
-      opacity 0.18s ease;
+      clip-path
+        0.58s
+        cubic-bezier(
+          0.77,
+          0,
+          0.18,
+          1
+        ),
+
+      opacity
+        0.18s
+        ease;
   }
 
-  /* Dekorativni krug */
+
+  /* =======================================================
+     DEKORATIVNI KRUG U MENIJU
+  ======================================================= */
 
   .nav::before {
     content: "";
@@ -319,84 +629,151 @@
     top: -155px;
     right: -120px;
 
-    border: 1px solid rgba(255, 255, 255, 0.09);
+    left: auto;
+
+    transform: none;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.085);
+
     border-radius: 50%;
+
+    background: transparent;
+
+    filter: none;
+
+    box-shadow:
+      0 0 0 16px
+        rgba(196, 0, 0, 0.018),
+
+      0 0 0 34px
+        rgba(196, 0, 0, 0.012);
 
     pointer-events: none;
   }
 
-  /* LINKOVI */
+
+  /* =======================================================
+     MOBILE LINKS
+  ======================================================= */
 
   .nav a {
     width: fit-content;
 
     color: #ffffff;
 
+    background: transparent;
+
+    box-shadow: none;
+
     font-size: 18px;
     font-weight: 600;
 
     line-height: 1.2;
 
-    padding: 9px 0;
+    padding:
+      9px 11px;
+
+    border-radius: 7px;
 
     letter-spacing: -0.15px;
 
     opacity: 0;
-    transform: translateY(10px);
+
+    transform:
+      translateY(10px);
 
     transition:
       color 0.22s ease,
+      background 0.22s ease,
       opacity 0.28s ease,
       transform 0.32s ease;
   }
 
+
   .nav.nav-open a {
     opacity: 1;
-    transform: translateY(0);
+
+    transform:
+      translateY(0);
   }
+
 
   .nav.nav-open a:nth-child(1) {
     transition-delay: 0.13s;
   }
 
+
   .nav.nav-open a:nth-child(2) {
     transition-delay: 0.18s;
   }
+
 
   .nav.nav-open a:nth-child(3) {
     transition-delay: 0.23s;
   }
 
+
   .nav.nav-open a:nth-child(4) {
     transition-delay: 0.28s;
   }
 
-  .nav a::after {
-    bottom: 3px;
 
-    height: 2px;
+  .nav a:hover {
+    color: #ffffff;
 
-    background: #e00000;
+    background:
+      rgba(255, 255, 255, 0.055);
+
+    box-shadow: none;
+
+    transform:
+      translateY(0);
   }
 
-  .nav a:hover,
+
   .nav a.active {
     color: #ffffff;
   }
 
-  /*
-    Kada se meni otvori, ne skrivamo header ni logo.
-    Oni ostaju normalno renderovani iza crnog menija.
-  */
 
-  .header-menu-open {
-    background: rgba(255, 255, 255, 0.98);
-    border-bottom-color: #eeeeee;
+  .nav a::after {
+    left: 11px;
+    right: 11px;
+
+    bottom: 2px;
+
+    height: 2px;
+
+    background: #e00000;
+
+    box-shadow:
+      0 0 8px
+      rgba(224, 0, 0, 0.35);
   }
 
+
+  /* =======================================================
+     HEADER DOK JE MENI OTVOREN
+  ======================================================= */
+
+  .header-menu-open {
+    background:
+      rgba(255, 255, 255, 0.98);
+  }
+
+
+  .header-menu-open::after {
+    opacity: 0;
+  }
+
+
   /*
-    Samo kontrole SR / EN i X moraju biti iznad menija.
+    Header i logo ostaju normalno renderovani.
+    Crni meni ih samo prekriva svojim višim z-indexom.
   */
+
 
   .header-menu-open .header-actions {
     position: fixed;
@@ -407,85 +784,135 @@
     z-index: 7200;
   }
 
-  .header-menu-open .language-switch button {
+
+  .header-menu-open .language-switch {
+    background:
+      rgba(255, 255, 255, 0.055);
+
+    border-color:
+      rgba(255, 255, 255, 0.09);
+  }
+
+
+  .header-menu-open
+  .language-switch button {
     color: #d0d0d0;
   }
 
-  .header-menu-open .language-switch button.active {
+
+  .header-menu-open
+  .language-switch button.active {
     color: #ff3030;
+
+    text-shadow:
+      0 0 10px
+      rgba(255, 48, 48, 0.18);
   }
 
-  .header-menu-open .language-switch span {
+
+  .header-menu-open
+  .language-switch span {
     background: #5d5d5d;
   }
 
-  /* HAMBURGER -> X */
+
+  /* =======================================================
+     HAMBURGER -> X
+  ======================================================= */
 
   .menu-toggle-open {
     z-index: 7300;
   }
 
+
   .menu-toggle-open span {
     background: #ffffff;
   }
 
+
   .menu-toggle-open span:nth-child(1) {
     top: 19px;
-    transform: rotate(45deg);
+
+    transform:
+      rotate(45deg);
   }
+
 
   .menu-toggle-open span:nth-child(2) {
     opacity: 0;
   }
 
+
   .menu-toggle-open span:nth-child(3) {
     top: 19px;
-    transform: rotate(-45deg);
+
+    transform:
+      rotate(-45deg);
   }
 }
 
-/* MANJI TELEFONI */
+
+/* =========================================================
+   MANJI TELEFONI
+========================================================= */
 
 @media (max-width: 420px) {
+
   .header {
-    padding: 0 14px;
+    padding:
+      0 14px;
   }
+
 
   .logo img {
     height: 45px;
   }
 
+
   .header-actions {
-    gap: 7px;
+    gap: 5px;
   }
+
+
+  .language-switch {
+    padding:
+      6px 8px;
+  }
+
 
   .language-switch button {
     font-size: 11px;
   }
 
+
   .language-switch span {
     height: 12px;
   }
 
+
   .nav {
-    /*
-      Malo niži meni na manjim telefonima.
-    */
     height: 62dvh;
 
-    border-radius: 0 0 0 52vw;
+    border-radius:
+      0 0 0 52vw;
 
-    padding: 82px 22px 24px;
+    padding:
+      82px 22px 24px;
 
     gap: 4px;
   }
 
+
   .nav a {
     font-size: 17px;
-    padding: 8px 0;
+
+    padding:
+      8px 10px;
   }
 
-  .header-menu-open .header-actions {
+
+  .header-menu-open
+  .header-actions {
     top: 15px;
     right: 14px;
   }

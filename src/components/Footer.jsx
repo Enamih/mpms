@@ -4,7 +4,7 @@ import "./Footer.css";
 
 const footerText = {
   sr: {
-    tagline: "Pouzdan partner u realizaciji građevinskih projekata.",
+    tagline: "Pouzdan partner u realizaciji građevinskih projekata",
     home: "Početna",
     about: "O nama",
     projects: "Projekti",
@@ -14,7 +14,7 @@ const footerText = {
     belgrade: "Beograd",
   },
   en: {
-    tagline: "A reliable partner in the delivery of construction projects.",
+    tagline: "A reliable partner in the delivery of construction projects",
     home: "Home",
     about: "About us",
     projects: "Projects",
@@ -47,12 +47,12 @@ function Footer() {
   <h3>Novi Sad</h3>
 
   <a
-    href="https://www.google.com/maps/search/?api=1&query=Bulevar+Slobodana+Jovanovica+15,+Novi+Sad"
+    href="https://www.google.com/maps/search/?api=1&query=Bulevar+Slobodana+Jovanovica+128i,+Novi+Sad"
     target="_blank"
     rel="noopener noreferrer"
     className="footer-address"
   >
-    Bulevar Slobodana Jovanovića 15
+    Bulevar Slobodana Jovanovića 128i
   </a>
 
   <a href="tel:+38169685607">
