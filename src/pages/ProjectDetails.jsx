@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useLanguage from "../hooks/useLanguage";
 import "./ProjectDetails.css";
 
@@ -7,18 +7,18 @@ const projects = {
   inkluzija: {
     images: [
       "/inkluzija/inkluzija1.jpg",
-      "/inkluzija/inkluzija-3-960x860.jpg",
-      "/inkluzija/inkluzija-thumb-580x720.jpg",
       "/inkluzija/img1.jpg",
       "/inkluzija/img2.jpg",
       "/inkluzija/img3.jpg",
-      "/inkluzija/img4.jpg",
-      "/inkluzija/img5.jpg",
-      "/inkluzija/img6.jpg",
-      "/inkluzija/img7.jpg",
-      "/inkluzija/img8.jpg",
+      "/inkluzija/img4.jpeg",
+      "/inkluzija/img5.jpeg",
+      "/inkluzija/img6.jpeg",
+      "/inkluzija/img7.jpeg",
+      "/inkluzija/img8.jpeg",
       "/inkluzija/img9.jpg",
       "/inkluzija/img10.jpg",
+      "/inkluzija/img11.jpg",
+      "/inkluzija/img12.jpeg"
     ],
     sr: {
       title: "Centar za rani razvoj dece i inkluziju",
@@ -71,7 +71,7 @@ const projects = {
       "/expo/image1.jpeg",
       "/expo/image2.jpeg",
       "/expo/image3.jpeg",
-      "/expo/image4.jpeg"
+      "/expo/image4.jpeg",
     ],
     sr: {
       title: "EXPO 2027",
@@ -116,13 +116,14 @@ const projects = {
   },
 
   "nacionalni-stadion": {
-    images: [
-      "/nacionalni-stadion/nacionalni-stadion-1-1920x980.jpg",
-      "/nacionalni-stadion/nacionalni-stadion-3-960x860.jpg",
-      "/nacionalni-stadion/nacionalni-stadion-thumb-580x720.jpg",
-      "/nacionalni-stadion/image5.jpeg",
+        images: [
       "/nacionalni-stadion/image6.jpeg",
       "/nacionalni-stadion/image7.jpeg",
+      "/nacionalni-stadion/image5.jpeg",
+      "/nacionalni-stadion/nacionalni-stadion-1-1920x980.jpg",
+      "/nacionalni-stadion/nacionalni-stadion-3-960x860.jpg",
+      "/nacionalni-stadion/nacionalni-stadion-thumb-580x720.jpg" 
+           
     ],
     sr: {
       title: "Nacionalni stadion",
@@ -167,6 +168,7 @@ const projects = {
   },
 
   "epic-games": {
+    heroPosition: "center 75%",
     images: [
       "/epic-games/epic-games-1-1920x980.jpg",
       "/epic-games/epic-games-2-1220x860.jpg",
@@ -216,7 +218,7 @@ const projects = {
     images: [
       "/planet-residence/planet-residence-1-1920x980.jpg",
       "/planet-residence/planet-residence-2-1220x860.jpg",
-      "/planet-residence/planet-residence-thumb-580x720.jpg",
+      "/planet-residence/planet-residence-3-960x860.jpg",
     ],
     sr: {
       title: "Planet Residence",
@@ -262,9 +264,10 @@ const projects = {
 
   "spp-neznanog-junaka": {
     images: [
-      "/spp-neznanog-junaka/spp-neznanog-junaka-1-1920x980.jpg",
-      "/spp-neznanog-junaka/spp-neznanog-junaka-2-1220x860.jpg",
-      "/spp-neznanog-junaka/spp-neznanog-junaka-thumb-580x720.jpg",
+      "/spp-neznanog-junaka/img1.jpg",
+      "/spp-neznanog-junaka/img2.jpg",
+      "/spp-neznanog-junaka/img3.jpg",
+      "/spp-neznanog-junaka/img4.jpg"
     ],
     sr: {
       title: "SPP Neznanog junaka",
@@ -456,7 +459,9 @@ const uiText = {
     storyAccent: "i kvalitet izvođenja.",
     gallery: "Galerija",
     galleryTitle: "Fotografije projekta",
-    view: "Pogledaj +",
+    view: "Otvori fotografiju",
+    nextPhoto: "Sledeća fotografija",
+    previousPhoto: "Prethodna fotografija",
     allProjects: "Svi projekti",
     notFound: "Projekat nije pronađen",
     back: "Nazad na projekte",
@@ -467,27 +472,53 @@ const uiText = {
     storyAccent: "and quality in execution.",
     gallery: "Gallery",
     galleryTitle: "Project photos",
-    view: "View +",
+    view: "Open photo",
+    nextPhoto: "Next photo",
+    previousPhoto: "Previous photo",
     allProjects: "All projects",
     notFound: "Project not found",
     back: "Back to projects",
   },
 };
 
+const hiddenHighlightValues = new Set([
+  "AB",
+  "AGZ",
+  "PM",
+  "RC",
+  "R&D",
+]);
+
 function ProjectDetails() {
   const { slug } = useParams();
   const { language } = useLanguage();
+
   const projectSource = projects[slug];
-  const [activeImageIndex, setActiveImageIndex] = useState(null);
+
+  const [activeImageIndex, setActiveImageIndex] =
+    useState(null);
+
+  const [galleryImageIndex, setGalleryImageIndex] =
+    useState(0);
+
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
+
   const t = uiText[language];
+
+  useEffect(() => {
+    setGalleryImageIndex(0);
+    setActiveImageIndex(null);
+  }, [slug]);
 
   if (!projectSource) {
     return (
       <main className="project-not-found">
         <h1>{t.notFound}</h1>
-        <Link to="/projekti">← {t.back}</Link>
+
+        <Link to="/projekti">
+          ← {t.back}
+        </Link>
       </main>
     );
   }
@@ -495,45 +526,88 @@ function ProjectDetails() {
   const project = projectSource[language];
   const images = projectSource.images;
 
+  const previousGalleryImage = () => {
+    setGalleryImageIndex((current) =>
+      current === 0
+        ? images.length - 1
+        : current - 1
+    );
+  };
+
+  const nextGalleryImage = () => {
+    setGalleryImageIndex((current) =>
+      current === images.length - 1
+        ? 0
+        : current + 1
+    );
+  };
+
+  const previousGalleryIndex =
+    images.length > 1
+      ? (galleryImageIndex - 1 + images.length) %
+        images.length
+      : galleryImageIndex;
+
+  const nextGalleryIndex =
+    images.length > 1
+      ? (galleryImageIndex + 1) % images.length
+      : galleryImageIndex;
+
   const previousImage = () => {
-    setActiveImageIndex((current) => (current === 0 ? images.length - 1 : current - 1));
+    setActiveImageIndex((current) =>
+      current === 0
+        ? images.length - 1
+        : current - 1
+    );
   };
 
   const nextImage = () => {
-    setActiveImageIndex((current) => (current === images.length - 1 ? 0 : current + 1));
+    setActiveImageIndex((current) =>
+      current === images.length - 1
+        ? 0
+        : current + 1
+    );
   };
 
   const handleTouchStart = (event) => {
-  touchStartX.current = event.changedTouches[0].clientX;
-};
+    touchStartX.current =
+      event.changedTouches[0].clientX;
+  };
 
-const handleTouchMove = (event) => {
-  touchEndX.current = event.changedTouches[0].clientX;
-};
+  const handleTouchMove = (event) => {
+    touchEndX.current =
+      event.changedTouches[0].clientX;
+  };
 
-const handleTouchEnd = () => {
-  if (touchStartX.current === null || touchEndX.current === null) {
-    return;
-  }
+  const handleTouchEnd = () => {
+    if (
+      touchStartX.current === null ||
+      touchEndX.current === null
+    ) {
+      return;
+    }
 
-  const distance = touchStartX.current - touchEndX.current;
+    const distance =
+      touchStartX.current -
+      touchEndX.current;
 
-  const minSwipeDistance = 50;
+    const minSwipeDistance = 50;
 
-  if (distance > minSwipeDistance) {
-    nextImage();
-  }
+    if (distance > minSwipeDistance) {
+      nextImage();
+    }
 
-  if (distance < -minSwipeDistance) {
-    previousImage();
-  }
+    if (distance < -minSwipeDistance) {
+      previousImage();
+    }
 
-  touchStartX.current = null;
-  touchEndX.current = null;
-};
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
 
   return (
     <main className="project-details-page">
+
       <section
         className="project-hero-new"
         style={{
@@ -546,133 +620,447 @@ const handleTouchEnd = () => {
             ),
             url("${images[0]}")
           `,
+          backgroundPosition:
+      projectSource.heroPosition || "center center",
         }}
       >
         <div className="project-hero-inner">
-          <span className="project-category">{project.category}</span>
+          <span className="project-category">
+            {project.category}
+          </span>
+
           <h1>{project.title}</h1>
         </div>
       </section>
 
+
       <section className="project-facts">
         {project.facts.map((fact) => (
-          <div className="project-fact" key={fact.label}>
+          <div
+            className="project-fact"
+            key={fact.label}
+          >
             <span>{fact.label}</span>
+
             <strong>{fact.value}</strong>
           </div>
         ))}
       </section>
 
+
       <section className="project-story">
+
         <div className="project-story-title">
-          <span className="project-small-label">{t.about}</span>
+
+          <span className="project-small-label">
+            {t.about}
+          </span>
+
           <h2>
             {t.story}
+
             <br />
-            <em>{t.storyAccent}</em>
+
+            <em>
+              {t.storyAccent}
+            </em>
           </h2>
+
         </div>
+
 
         <div className="project-story-copy">
-          {project.description.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+
+          {project.description.map(
+            (paragraph) => (
+              <p key={paragraph}>
+                {paragraph}
+              </p>
+            )
+          )}
+
         </div>
+
       </section>
 
-      <section className={`project-highlights highlights-${Math.min(project.highlights.length, 4)}`}>
-        {project.highlights.map((highlight) => (
-          <div className="project-highlight" key={highlight.label}>
-            <strong>{highlight.value}</strong>
-            <span>{highlight.label}</span>
-          </div>
-        ))}
+
+      <section className="project-key-points">
+
+        <div
+          className={`project-key-points-inner key-points-${project.highlights.length}`}
+        >
+
+          {project.highlights.map(
+            (highlight) => {
+
+              const showValue =
+                !hiddenHighlightValues.has(
+                  highlight.value
+                );
+
+              return (
+                <article
+                  className="project-key-point"
+                  key={highlight.label}
+                >
+
+                  <strong>
+                    {highlight.label}
+                  </strong>
+
+                  {showValue && (
+                    <span className="project-key-point-value">
+                      {highlight.value}
+                    </span>
+                  )}
+
+                </article>
+              );
+            }
+          )}
+
+        </div>
+
       </section>
+
 
       <section className="project-gallery-new">
-        <div className="gallery-heading">
-          <span className="project-small-label">{t.gallery}</span>
-          <h2>{t.galleryTitle}</h2>
+
+        <div className="gallery-heading gallery-heading-slider">
+
+          <div>
+
+            <span className="project-small-label">
+              {t.gallery}
+            </span>
+
+            <h2>
+              {t.galleryTitle}
+            </h2>
+
+          </div>
+
+
+          <span className="project-slider-count">
+
+            {String(
+              galleryImageIndex + 1
+            ).padStart(2, "0")}
+
+            <span>/</span>
+
+            {String(
+              images.length
+            ).padStart(2, "0")}
+
+          </span>
+
         </div>
 
-        <div className="gallery-layout">
-          {images.map((image, index) => (
+
+        <div className="project-slider">
+
+
+          {images.length > 1 && (
             <button
               type="button"
-              className="gallery-item"
-              key={image}
-              onClick={() => setActiveImageIndex(index)}
+              className="
+                project-slider-side
+                project-slider-side-left
+              "
+              onClick={
+                previousGalleryImage
+              }
+              aria-label={
+                t.previousPhoto
+              }
             >
-              <img src={image} alt={`${project.title} - ${index + 1}`} />
-              <span className="gallery-open">{t.view}</span>
+
+              <img
+                src={
+                  images[
+                    previousGalleryIndex
+                  ]
+                }
+                alt={`${project.title} - ${
+                  previousGalleryIndex + 1
+                }`}
+              />
+
+              <span className="project-slider-side-overlay" />
+
             </button>
-          ))}
+          )}
+
+
+          <div className="project-slider-center">
+
+            <button
+              type="button"
+              className="project-slider-main"
+              onClick={() =>
+                setActiveImageIndex(
+                  galleryImageIndex
+                )
+              }
+              aria-label={t.view}
+            >
+
+              <img
+                src={
+                  images[
+                    galleryImageIndex
+                  ]
+                }
+                alt={`${project.title} - ${
+                  galleryImageIndex + 1
+                }`}
+              />
+
+
+              <span className="project-slider-open">
+
+                <span>
+                  {t.view}
+                </span>
+
+                <strong>
+                  ↗
+                </strong>
+
+              </span>
+
+            </button>
+
+
+            {images.length > 1 && (
+              <>
+
+                <button
+                  type="button"
+                  className="
+                    project-slider-arrow
+                    project-slider-arrow-left
+                  "
+                  onClick={
+                    previousGalleryImage
+                  }
+                  aria-label={
+                    t.previousPhoto
+                  }
+                >
+                  ‹
+                </button>
+
+
+                <button
+                  type="button"
+                  className="
+                    project-slider-arrow
+                    project-slider-arrow-right
+                  "
+                  onClick={
+                    nextGalleryImage
+                  }
+                  aria-label={
+                    t.nextPhoto
+                  }
+                >
+                  ›
+                </button>
+
+              </>
+            )}
+
+          </div>
+
+
+          {images.length > 1 && (
+            <button
+              type="button"
+              className="
+                project-slider-side
+                project-slider-side-right
+              "
+              onClick={
+                nextGalleryImage
+              }
+              aria-label={
+                t.nextPhoto
+              }
+            >
+
+              <img
+                src={
+                  images[
+                    nextGalleryIndex
+                  ]
+                }
+                alt={`${project.title} - ${
+                  nextGalleryIndex + 1
+                }`}
+              />
+
+              <span className="project-slider-side-overlay" />
+
+            </button>
+          )}
+
         </div>
+
+
+        <div className="project-slider-progress">
+
+          {images.map(
+            (image, index) => (
+              <button
+                type="button"
+                key={image}
+                className={`project-slider-dot ${
+                  index ===
+                  galleryImageIndex
+                    ? "is-active"
+                    : ""
+                }`}
+                onClick={() =>
+                  setGalleryImageIndex(
+                    index
+                  )
+                }
+                aria-label={`${t.gallery} ${
+                  index + 1
+                }`}
+              />
+            )
+          )}
+
+        </div>
+
       </section>
+
 
       <section className="project-back">
-        <Link to="/projekti">
-          <span>←</span>
-          {t.allProjects}
-        </Link>
+
+        <div className="project-back-inner">
+
+          <Link to="/projekti">
+
+            <span>
+              ←
+            </span>
+
+            {t.allProjects}
+
+          </Link>
+
+        </div>
+
       </section>
 
+
       {activeImageIndex !== null && (
-  <div
-    className="project-lightbox"
-    onClick={() => setActiveImageIndex(null)}
-    onTouchStart={handleTouchStart}
-    onTouchMove={handleTouchMove}
-    onTouchEnd={handleTouchEnd}
-  >
-    <button
-      type="button"
-      className="project-lightbox-close"
-      onClick={() => setActiveImageIndex(null)}
-      aria-label="Close"
-    >
-      ×
-    </button>
 
-    <button
-      type="button"
-      className="project-lightbox-arrow project-lightbox-prev"
-      onClick={(event) => {
-        event.stopPropagation();
-        previousImage();
-      }}
-      aria-label="Previous"
-    >
-      ‹
-    </button>
+        <div
+          className="project-lightbox"
+          onClick={() =>
+            setActiveImageIndex(null)
+          }
+          onTouchStart={
+            handleTouchStart
+          }
+          onTouchMove={
+            handleTouchMove
+          }
+          onTouchEnd={
+            handleTouchEnd
+          }
+        >
 
-    <img
-      src={images[activeImageIndex]}
-      alt={project.title}
-      draggable="false"
-      onClick={(event) => event.stopPropagation()}
-    />
 
-    <button
-      type="button"
-      className="project-lightbox-arrow project-lightbox-next"
-      onClick={(event) => {
-        event.stopPropagation();
-        nextImage();
-      }}
-      aria-label="Next"
-    >
-      ›
-    </button>
+          <button
+            type="button"
+            className="project-lightbox-close"
+            onClick={() =>
+              setActiveImageIndex(null)
+            }
+            aria-label="Close"
+          >
+            ×
+          </button>
 
-    <div
-      className="project-lightbox-counter"
-      onClick={(event) => event.stopPropagation()}
-    >
-      {activeImageIndex + 1} / {images.length}
-    </div>
-  </div>
-)}
+
+          <button
+            type="button"
+            className="
+              project-lightbox-arrow
+              project-lightbox-prev
+            "
+            onClick={(event) => {
+
+              event.stopPropagation();
+
+              previousImage();
+
+            }}
+            aria-label="Previous"
+          >
+            ‹
+          </button>
+
+
+          <div
+            className="project-lightbox-stage"
+            onClick={(event) =>
+              event.stopPropagation()
+            }
+          >
+
+            <img
+              src={
+                images[
+                  activeImageIndex
+                ]
+              }
+              alt={project.title}
+              draggable="false"
+            />
+
+
+            <div className="project-lightbox-counter">
+
+              {activeImageIndex + 1}
+
+              {" / "}
+
+              {images.length}
+
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            className="
+              project-lightbox-arrow
+              project-lightbox-next
+            "
+            onClick={(event) => {
+
+              event.stopPropagation();
+
+              nextImage();
+
+            }}
+            aria-label="Next"
+          >
+            ›
+          </button>
+
+        </div>
+
+      )}
+
     </main>
   );
 }

@@ -10,7 +10,7 @@ const companyProjects = [
     },
     category: { sr: "Javni objekat", en: "Public facility" },
     location: { sr: "Beograd", en: "Belgrade" },
-    image: "/inkluzija/inkluzija1.jpg",
+    image: "/inkluzija/inkluzija-glavna.jpg",
   },
   {
     slug: "expo",
@@ -48,7 +48,7 @@ const companyProjects = [
     title: { sr: "SPP Neznanog junaka", en: "Neznanog Junaka Mixed-Use Building" },
     category: { sr: "Stambeno-poslovni objekat", en: "Mixed-use building" },
     location: { sr: "Beograd", en: "Belgrade" },
-    image: "/spp-neznanog-junaka/spp-neznanog-junaka-1-1920x980.jpg",
+    image: "/spp-neznanog-junaka/img1.jpg",
   },
 ];
 
