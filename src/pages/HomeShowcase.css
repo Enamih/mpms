@@ -1081,8 +1081,7 @@
 
   .home-showcase {
     padding:
-      32px 20px
-      20px;
+      32px 20px 20px;
   }
 
 
@@ -1123,10 +1122,10 @@
       42px;
 
     width:
-      43%;
+      53%;
 
     height:
-      36%;
+      40%;
   }
 
 
@@ -1135,13 +1134,13 @@
       6%;
 
     bottom:
-      37px;
+      15%;
 
     width:
-      42%;
+      40%;
 
     height:
-      34%;
+      36%;
   }
 
 
