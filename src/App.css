@@ -2032,9 +2032,36 @@ main {
 /* PROJECTS */
 
 .projects-page {
-  background:
-    radial-gradient(circle at top left, rgba(196, 0, 0, 0.05), transparent 28%),
-    linear-gradient(135deg, #f7f7f7 0%, #eeeeee 45%, #fafafa 100%);
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  overflow: hidden;
+
+  background-color: #f4f4f4;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.54),
+      rgba(255, 255, 255, 0.60)
+    ),
+    url("/background/background.avif");
+
+  background-size:
+    100% 100%,
+    100% 100%;
+
+  background-position:
+    center top,
+    center top;
+
+  background-repeat:
+    no-repeat,
+    no-repeat;
+}
+
+.projects-page + .footer {
+  margin-top: 0;
 }
 
 .projects-hero {

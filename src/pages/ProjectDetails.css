@@ -1,6 +1,30 @@
 .project-details-page {
+  position: relative;
+  isolation: isolate;
+
   width: 100%;
-  background: #ffffff;
+  overflow: hidden;
+
+  background-color: #f4f4f4;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.54),
+      rgba(255, 255, 255, 0.60)
+    ),
+    url("/background/background.avif");
+
+  background-size:
+    100% 100%,
+    100% 100%;
+
+  background-position:
+    center top,
+    center top;
+
+  background-repeat:
+    no-repeat,
+    no-repeat;
 }
 
 
@@ -246,14 +270,8 @@
 /* KLJUCNE STAVKE */
 
 .project-key-points {
-  width: 100%;
-
-  padding:
-    0
-    0
-    76px;
-
-  background: #ffffff;
+  padding: 0 5% 76px;
+  background: transparent;
 }
 
 .project-key-points-inner {
@@ -391,15 +409,8 @@
 /* GALERIJA */
 
 .project-gallery-new {
-  width: 100%;
-
-  padding:
-    74px
-    0
-    60px;
-
-  background: #f5f5f3;
-
+  padding: 74px 5% 58px;
+  background: transparent;
   overflow: hidden;
 }
 
@@ -837,9 +848,11 @@
     0
     68px;
 
-  background: #f5f5f3;
+  background: transparent;
 }
-
+.project-details-page + .footer {
+  margin-top: 0;
+}
 .project-back-inner {
   width: min(
     1380px,
