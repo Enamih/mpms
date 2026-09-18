@@ -139,30 +139,25 @@ function Footer() {
 
 
       {/* FOOTER BOTTOM */}
+<div className="footer-bottom">
 
-      <div className="footer-bottom">
+  <span>
+    © 2026 MPM Construction Plus. {t.rights}
+  </span>
 
-        <span>
-          © 2026 MPM Construction Plus. {t.rights}
-        </span>
+  <span className="footer-credit">
+    Powered by{" "}
 
-        <span className="footer-bottom-separator">
-          •
-        </span>
+    <a
+      href="https://www.linkedin.com/in/ena-mihajlovic/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Ena Mihajlovic
+    </a>
+  </span>
 
-        <span className="footer-credit">
-          Powered by{" "}
-
-          <a
-            href={AUTHOR_LINKEDIN}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Ena Mihajlovic
-          </a>
-        </span>
-
-      </div>
+</div>
 
     </footer>
   );

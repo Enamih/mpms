@@ -243,7 +243,7 @@ function Home() {
               (card, index) => {
                 card.style.setProperty(
                   "--reveal-delay",
-                  `${index * 300}ms`
+                  `${index * 160}ms`
                 );
 
                 card.classList.add(
@@ -258,9 +258,9 @@ function Home() {
           });
         },
         {
-          threshold: 0.15,
+          threshold: 0.25,
           rootMargin:
-            "0px 0px -50px 0px",
+            "0px 0px 180px 0px",
         }
       );
 
