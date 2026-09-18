@@ -631,3 +631,33 @@
         rgba(196, 0, 0, 0.018);
   }
 }
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 100%;
+  text-align: center;
+}
+
+.footer-bottom-separator {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.footer-credit {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.footer-credit a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-weight: 600;
+
+  transition: color 0.25s ease;
+}
+
+.footer-credit a:hover {
+  color: #d00000;
+}

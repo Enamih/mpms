@@ -5,8 +5,8 @@ const companyProjects = [
   {
     slug: "inkluzija",
     title: {
-      sr: "Centar za rani razvoj deteta i inkluziju",
-      en: "Center for Early Childhood Development and Inclusion",
+      sr: "Institut za rani razvoj deteta i inkluziju",
+      en: "Institute for Early Childhood Development and Inclusion",
     },
     category: { sr: "Javni objekat", en: "Public facility" },
     location: { sr: "Beograd", en: "Belgrade" },
@@ -62,7 +62,7 @@ const employeeReferences = [
   },
   {
     slug: "usce",
-    title: { sr: "Ušće Kula 2", en: "UŠĆE Tower II" },
+    title: { sr: "Ušće Kula 2", en: "UŠĆE Tower 2" },
     category: { sr: "Poslovni objekat", en: "Office building" },
     location: { sr: "Novi Beograd", en: "New Belgrade" },
     image: "/usce/usce-1.jpg",
@@ -86,7 +86,7 @@ const pageText = {
     employeeLabel: "Lične reference zaposlenih",
     employeeTitle: "Iskustvo članova našeg tima",
     employeeIntro:
-      "Ovi projekti predstavljaju profesionalno iskustvo i lične reference zaposlenih stečene kroz ranije angažmane i ne predstavljaju projekte koje MPM Construction Plus pripisuje sebi.",
+      "Ovi projekti predstavljaju profesionalno iskustvo i lične reference zaposlenih stečene kroz ranije angažmane",
   },
   en: {
     label: "Our projects",
@@ -97,7 +97,7 @@ const pageText = {
     employeeLabel: "Employees' professional references",
     employeeTitle: "Experience of our team members",
     employeeIntro:
-      "These projects represent the professional experience and personal references of our employees gained through previous engagements and are not presented as projects delivered by MPM Construction Plus.",
+      "These projects represent the professional experience and personal references of our employees gained through previous engagements",
   },
 };
 

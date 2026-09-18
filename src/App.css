@@ -1736,8 +1736,8 @@ main {
 
   background: rgba(8, 8, 8, 0.38);
 
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
 
   animation: aboutGalleryBackdrop 0.25s ease;
 }
@@ -2075,11 +2075,26 @@ main {
   background-size: cover;
   background-position: center 55%;
 }
+.projects-reference-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 .projects-reference-intro .section-label {
   font-size: 22px;
   letter-spacing: 1.6px;
   font-weight: 800;
   margin-bottom: 14px;
+  text-align: center;
+}
+
+.projects-reference-intro .projects-reference-note {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .projects-hero-content {
@@ -2264,7 +2279,7 @@ main {
   display: flex;
   align-items: center;
   overflow: hidden;
-  background-image: url("/contact-hero.jpg");
+  background-image: url("/inkluzija/img52.jpeg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

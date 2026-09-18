@@ -7,21 +7,39 @@ const projects = {
   inkluzija: {
     images: [
       "/inkluzija/inkluzija1.jpg",
-      "/inkluzija/img1.jpg",
-      "/inkluzija/img2.jpg",
-      "/inkluzija/img3.jpg",
+      "/inkluzija/img1.jpeg",
+      "/inkluzija/img2.jpeg",
+      "/inkluzija/img3.jpeg",
       "/inkluzija/img4.jpeg",
       "/inkluzija/img5.jpeg",
       "/inkluzija/img6.jpeg",
       "/inkluzija/img7.jpeg",
       "/inkluzija/img8.jpeg",
-      "/inkluzija/img9.jpg",
-      "/inkluzija/img10.jpg",
-      "/inkluzija/img11.jpg",
-      "/inkluzija/img12.jpeg"
+      "/inkluzija/img9.jpeg",
+      "/inkluzija/img10.jpeg",
+      "/inkluzija/img11.jpeg",
+      "/inkluzija/img12.jpeg",
+       "/inkluzija/img13.jpeg",
+    "/inkluzija/img14.jpeg",
+    "/inkluzija/img15.jpeg",
+    "/inkluzija/img16.jpeg",
+    "/inkluzija/img17.jpeg",
+    "/inkluzija/img18.jpeg",
+    "/inkluzija/img19.jpeg",
+    "/inkluzija/img20.jpeg",
+    "/inkluzija/img21.jpeg",
+    "/inkluzija/img22.jpeg",
+    "/inkluzija/img23.jpeg",
+    "/inkluzija/img24.jpeg",
+    "/inkluzija/img25.jpeg",
+    "/inkluzija/img27.jpg",
+    "/inkluzija/img28.jpeg",
+    "/inkluzija/img29.jpeg",
+    "/inkluzija/img30.jpeg",
+    "/inkluzija/img31.jpg"
     ],
     sr: {
-      title: "Centar za rani razvoj dece i inkluziju",
+      title: "Institut za rani razvoj deteta i inkluziju",
       category: "Objekat društvene namene",
       facts: [
         { label: "Lokacija", value: "Beograd" },
@@ -384,7 +402,7 @@ const projects = {
       ],
     },
     en: {
-      title: "UŠĆE Tower II",
+      title: "UŠĆE Tower 2",
       category: "Office building",
       facts: [
         { label: "Location", value: "New Belgrade" },
@@ -399,8 +417,8 @@ const projects = {
         { value: "A+", label: "Building class" },
       ],
       description: [
-        "UŠĆE Tower II is one of the most representative new-generation office buildings in Belgrade and an important part of the UŠĆE business complex in New Belgrade. With a height of 103.9 metres and a total gross area of approximately 55,000 m², the building combines around 27,400 m² of office space with two underground levels providing approximately 750 parking spaces shared by both towers in the complex.",
-        "Designed as an A+ class office building, it features contemporary architecture with a fully glazed façade, open-plan office floors and a high degree of flexibility in space organization. Particular attention was paid to energy efficiency, sustainability and the quality of the indoor working environment, supported by modern building management systems and high construction standards. The combination of architectural aesthetics, functionality and contemporary engineering solutions makes UŠĆE Tower II one of Serbia's landmark office buildings.",
+        "UŠĆE Tower 2 is one of the most representative new-generation office buildings in Belgrade and an important part of the UŠĆE business complex in New Belgrade. With a height of 103.9 metres and a total gross area of approximately 55,000 m², the building combines around 27,400 m² of office space with two underground levels providing approximately 750 parking spaces shared by both towers in the complex.",
+        "Designed as an A+ class office building, it features contemporary architecture with a fully glazed façade, open-plan office floors and a high degree of flexibility in space organization. Particular attention was paid to energy efficiency, sustainability and the quality of the indoor working environment, supported by modern building management systems and high construction standards. The combination of architectural aesthetics, functionality and contemporary engineering solutions makes UŠĆE Tower 2 one of Serbia's landmark office buildings.",
       ],
     },
   },
@@ -510,6 +528,59 @@ function ProjectDetails() {
     setGalleryImageIndex(0);
     setActiveImageIndex(null);
   }, [slug]);
+
+  useEffect(() => {
+    if (activeImageIndex === null || !projectSource) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+
+    const imagesLength = projectSource.images.length;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setActiveImageIndex(null);
+        return;
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+
+        setActiveImageIndex((current) => {
+          if (current === null) {
+            return null;
+          }
+
+          return current === 0
+            ? imagesLength - 1
+            : current - 1;
+        });
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+
+        setActiveImageIndex((current) => {
+          if (current === null) {
+            return null;
+          }
+
+          return current === imagesLength - 1
+            ? 0
+            : current + 1;
+        });
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeImageIndex, projectSource]);
 
   if (!projectSource) {
     return (
