@@ -1717,3 +1717,24 @@
   }
 
 }
+
+/* =========================================================
+   BLUR PAGE + FOOTER WHILE LIGHTBOX IS OPEN
+========================================================= */
+
+body.project-lightbox-open
+.project-details-page
+> section {
+  filter: blur(8px);
+}
+
+body.project-lightbox-open
+.footer {
+  filter: blur(8px);
+}
+
+.project-details-page > section,
+.footer {
+  transition:
+    filter 0.22s ease;
+}

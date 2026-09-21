@@ -532,10 +532,12 @@ function ProjectDetails() {
   useEffect(() => {
     if (activeImageIndex === null || !projectSource) {
       document.body.style.overflow = "";
+      document.body.classList.remove("project-lightbox-open");
       return;
     }
 
     document.body.style.overflow = "hidden";
+    document.body.classList.add("project-lightbox-open");
 
     const imagesLength = projectSource.images.length;
 
@@ -578,6 +580,7 @@ function ProjectDetails() {
 
     return () => {
       document.body.style.overflow = "";
+      document.body.classList.remove("project-lightbox-open");
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [activeImageIndex, projectSource]);
@@ -1083,32 +1086,27 @@ function ProjectDetails() {
           </button>
 
 
-          <div
-            className="project-lightbox-stage"
-            onClick={(event) =>
-              event.stopPropagation()
-            }
-          >
+          <div className="project-lightbox-stage">
 
             <img
-              src={
-                images[
-                  activeImageIndex
-                ]
-              }
+              src={images[activeImageIndex]}
               alt={project.title}
               draggable="false"
+              onClick={(event) =>
+                event.stopPropagation()
+              }
             />
 
 
-            <div className="project-lightbox-counter">
-
+            <div
+              className="project-lightbox-counter"
+              onClick={(event) =>
+                event.stopPropagation()
+              }
+            >
               {activeImageIndex + 1}
-
               {" / "}
-
               {images.length}
-
             </div>
 
           </div>

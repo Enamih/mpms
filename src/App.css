@@ -2345,13 +2345,18 @@ main {
 .contact-new-hero-overlay {
   position: absolute;
   inset: 0;
-    z-index: -1;
-  background: linear-gradient(
-    90deg,
-    rgba(10, 10, 10, 0.86) 0%,
-    rgba(10, 10, 10, 0.58) 50%,
-    rgba(10, 10, 10, 0.24) 100%
-  );
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(10, 10, 10, 0.78) 0%,
+      rgba(10, 10, 10, 0.52) 45%,
+      rgba(10, 10, 10, 0.22) 100%
+    );
+
+  pointer-events: none;
 }
 
 .contact-new-hero-content {
