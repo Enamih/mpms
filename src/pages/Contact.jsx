@@ -407,9 +407,16 @@ function Contact() {
 
       <section className="contact-new-hero">
 
-        <div className="contact-new-hero-overlay" />
+  <img
+    src="/inkluzija/img21.jpeg"
+    alt=""
+    className="contact-new-hero-image"
+    aria-hidden="true"
+  />
 
-        <div className="contact-new-hero-content">
+  <div className="contact-new-hero-overlay" />
+
+  <div className="contact-new-hero-content">
 
           <span className="contact-new-label">
             {t.label}
