@@ -4,6 +4,8 @@ import {
   useState,
 } from "react";
 
+import { createPortal } from "react-dom";
+
 import { Link } from "react-router-dom";
 
 import useLanguage from "../hooks/useLanguage";
@@ -798,10 +800,10 @@ function Home() {
           LIGHTBOX
       =================================================== */}
 
-      {activeImage !== null && (
-
-        <div
-          className="about-gallery-lightbox"
+      {activeImage !== null &&
+        createPortal(
+          <div
+            className="about-gallery-lightbox"
           onClick={closeLightbox}
           onTouchStart={
             handleTouchStart
@@ -816,6 +818,21 @@ function Home() {
           aria-modal="true"
           aria-label="Galerija fotografija"
         >
+
+          {/* CLOSE */}
+
+          <button
+            type="button"
+            className="about-gallery-close"
+            onClick={(event) => {
+              event.stopPropagation();
+              closeLightbox();
+            }}
+            aria-label="Zatvori galeriju"
+          >
+            ×
+          </button>
+
 
           {/* LEFT ARROW */}
 
@@ -844,18 +861,6 @@ function Home() {
               event.stopPropagation()
             }
           >
-
-            <button
-              type="button"
-              className="gallery-image-close"
-              onClick={(event) => {
-                event.stopPropagation();
-                closeLightbox();
-              }}
-              aria-label="Zatvori galeriju"
-            >
-              ×
-            </button>
 
             <img
               key={
@@ -908,9 +913,9 @@ function Home() {
             ›
           </button>
 
-        </div>
-
-      )}
+          </div>,
+          document.body
+        )}
 
     </main>
   );

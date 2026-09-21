@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import useLanguage from "../hooks/useLanguage";
 import "./About.css";
 
@@ -535,10 +536,10 @@ function About() {
           LIGHTBOX GALERIJA
       ===================================================== */}
 
-      {activeImage !== null && (
-
-        <div
-          className="about-gallery-lightbox"
+      {activeImage !== null &&
+        createPortal(
+          <div
+            className="about-gallery-lightbox"
           onClick={closeLightbox}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -547,6 +548,21 @@ function About() {
           aria-modal="true"
           aria-label="Galerija fotografija"
         >
+
+          {/* CLOSE */}
+
+          <button
+            type="button"
+            className="about-gallery-close"
+            onClick={(event) => {
+              event.stopPropagation();
+              closeLightbox();
+            }}
+            aria-label="Zatvori galeriju"
+          >
+            ×
+          </button>
+
 
           {/* LEFT */}
 
@@ -574,18 +590,6 @@ function About() {
               event.stopPropagation()
             }
           >
-
-            <button
-              type="button"
-              className="gallery-image-close"
-              onClick={(event) => {
-                event.stopPropagation();
-                closeLightbox();
-              }}
-              aria-label="Zatvori galeriju"
-            >
-              ×
-            </button>
 
             <img
               key={ABOUT_GALLERY[activeImage].src}
@@ -623,9 +627,9 @@ function About() {
             ›
           </button>
 
-        </div>
-
-      )}
+          </div>,
+          document.body
+        )}
 
     </main>
   );

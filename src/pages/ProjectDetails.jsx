@@ -522,6 +522,10 @@ function ProjectDetails() {
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
 
+  const gallerySwipeStartX = useRef(null);
+  const gallerySwipeCurrentX = useRef(null);
+  const gallerySwipeTriggered = useRef(false);
+
   const t = uiText[language];
 
   useEffect(() => {
@@ -642,6 +646,83 @@ function ProjectDetails() {
         : current + 1
     );
   };
+
+  const handleGalleryPointerDown = (event) => {
+    if (event.pointerType !== "touch") {
+      return;
+    }
+
+    gallerySwipeStartX.current = event.clientX;
+    gallerySwipeCurrentX.current = event.clientX;
+    gallerySwipeTriggered.current = false;
+
+    if (event.currentTarget.setPointerCapture) {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    }
+  };
+
+  const handleGalleryPointerMove = (event) => {
+    if (
+      event.pointerType !== "touch" ||
+      gallerySwipeStartX.current === null
+    ) {
+      return;
+    }
+
+    gallerySwipeCurrentX.current = event.clientX;
+  };
+
+  const finishGallerySwipe = (event) => {
+    if (
+      event.pointerType !== "touch" ||
+      gallerySwipeStartX.current === null ||
+      gallerySwipeCurrentX.current === null
+    ) {
+      gallerySwipeStartX.current = null;
+      gallerySwipeCurrentX.current = null;
+      return;
+    }
+
+    const distance =
+      gallerySwipeStartX.current -
+      gallerySwipeCurrentX.current;
+
+    const minSwipeDistance = 35;
+
+    if (Math.abs(distance) >= minSwipeDistance) {
+      gallerySwipeTriggered.current = true;
+
+      if (distance > 0) {
+        nextGalleryImage();
+      } else {
+        previousGalleryImage();
+      }
+
+      window.setTimeout(() => {
+        gallerySwipeTriggered.current = false;
+      }, 0);
+    }
+
+    gallerySwipeStartX.current = null;
+    gallerySwipeCurrentX.current = null;
+  };
+
+  const handleGalleryPointerCancel = () => {
+    gallerySwipeStartX.current = null;
+    gallerySwipeCurrentX.current = null;
+    gallerySwipeTriggered.current = false;
+  };
+
+  const blockClickAfterGallerySwipe = (event) => {
+    if (!gallerySwipeTriggered.current) {
+      return false;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    return true;
+  };
+
 
   const handleTouchStart = (event) => {
     touchStartX.current =
@@ -836,7 +917,14 @@ function ProjectDetails() {
         </div>
 
 
-        <div className="project-slider">
+        <div
+          className="project-slider"
+          style={{ touchAction: "pan-y" }}
+          onPointerDown={handleGalleryPointerDown}
+          onPointerMove={handleGalleryPointerMove}
+          onPointerUp={finishGallerySwipe}
+          onPointerCancel={handleGalleryPointerCancel}
+        >
 
 
           {images.length > 1 && (
@@ -846,9 +934,17 @@ function ProjectDetails() {
                 project-slider-side
                 project-slider-side-left
               "
-              onClick={
-                previousGalleryImage
-              }
+              onClick={(event) => {
+                if (
+                  blockClickAfterGallerySwipe(
+                    event
+                  )
+                ) {
+                  return;
+                }
+
+                previousGalleryImage();
+              }}
               aria-label={
                 t.previousPhoto
               }
@@ -876,11 +972,19 @@ function ProjectDetails() {
             <button
               type="button"
               className="project-slider-main"
-              onClick={() =>
+              onClick={(event) => {
+                if (
+                  blockClickAfterGallerySwipe(
+                    event
+                  )
+                ) {
+                  return;
+                }
+
                 setActiveImageIndex(
                   galleryImageIndex
-                )
-              }
+                );
+              }}
               aria-label={t.view}
             >
 
@@ -920,9 +1024,17 @@ function ProjectDetails() {
                     project-slider-arrow
                     project-slider-arrow-left
                   "
-                  onClick={
-                    previousGalleryImage
-                  }
+                  onClick={(event) => {
+                    if (
+                      blockClickAfterGallerySwipe(
+                        event
+                      )
+                    ) {
+                      return;
+                    }
+
+                    previousGalleryImage();
+                  }}
                   aria-label={
                     t.previousPhoto
                   }
@@ -937,9 +1049,17 @@ function ProjectDetails() {
                     project-slider-arrow
                     project-slider-arrow-right
                   "
-                  onClick={
-                    nextGalleryImage
-                  }
+                  onClick={(event) => {
+                    if (
+                      blockClickAfterGallerySwipe(
+                        event
+                      )
+                    ) {
+                      return;
+                    }
+
+                    nextGalleryImage();
+                  }}
                   aria-label={
                     t.nextPhoto
                   }
@@ -960,9 +1080,17 @@ function ProjectDetails() {
                 project-slider-side
                 project-slider-side-right
               "
-              onClick={
-                nextGalleryImage
-              }
+              onClick={(event) => {
+                if (
+                  blockClickAfterGallerySwipe(
+                    event
+                  )
+                ) {
+                  return;
+                }
+
+                nextGalleryImage();
+              }}
               aria-label={
                 t.nextPhoto
               }
