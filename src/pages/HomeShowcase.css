@@ -1424,7 +1424,7 @@
 
 @media (max-width: 700px) {
   .about-gallery-lightbox > .about-gallery-close {
-    top: 58px !important;
+    top: 68px !important;
     right: 12px !important;
 
     width: 44px !important;
@@ -1441,7 +1441,7 @@
 
 @media (max-width: 420px) {
   .about-gallery-lightbox > .about-gallery-close {
-    top: 54px !important;
+    top: 64px !important;
     right: 10px !important;
 
     width: 42px !important;
