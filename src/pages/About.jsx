@@ -27,9 +27,8 @@ const content = {
       "Pouzdan partner u realizaciji građevinskih projekata",
 
     paragraphs: [
-      "MPM Construction Plus je kompanija specijalizovana za izvođenje građevinskih radova, upravljanje projektima i realizaciju kompleksnih građevinskih poduhvata. Kroz dugogodišnje iskustvo i profesionalan pristup, kompanija je učestvovala na projektima različitih namena, od stambenih i poslovnih objekata do velikih infrastrukturnih celina.",
+      "Kompanija se bavi izvođenjem građevinskih radova, upravljanjem projektima i realizacijom kompleksnih građevinskih poduhvata. Iskusan stručni tim garantuje kvalitet, efikasnu organizaciju i pouzdanu realizaciju projekata u ugovorenim rokovima.",
 
-      "Naš tim čine stručnjaci različitih profila koji zajedničkim radom obezbeđuju visok kvalitet izvođenja, efikasnu organizaciju i poštovanje ugovorenih rokova. Svojim stručnim znanjem, iskustvom i ličnim referencama, naši zaposleni dodatno doprinose kvalitetu, stručnom kapacitetu i ugledu kompanije, čime potvrđuju njenu sposobnost za uspešnu realizaciju i najzahtevnijih projekata.",
     ],
 
     values: [
@@ -89,9 +88,8 @@ const content = {
       "A reliable partner in the delivery of construction projects",
 
     paragraphs: [
-      "MPM Construction Plus specializes in construction works, project management and the delivery of complex building projects. Through years of experience and a professional approach, the company has participated in projects ranging from residential and office buildings to major infrastructure developments.",
+      "The company specializes in construction works, project management and the delivery of complex construction projects. An experienced professional team ensures quality, efficient organization and reliable project delivery within agreed deadlines.",
 
-      "Our team brings together professionals from different disciplines whose coordinated work ensures high execution quality, efficient organization and respect for agreed deadlines. Through their expertise, experience and professional references, our employees further contribute to the quality, professional capacity and reputation of the company.",
     ],
 
     values: [

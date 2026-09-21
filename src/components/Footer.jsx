@@ -9,25 +9,47 @@ const footerText = {
   sr: {
     tagline:
       "Pouzdan partner u realizaciji građevinskih projekata",
+
     home: "Početna",
     about: "O nama",
     projects: "Projekti",
     contact: "Kontakt",
-    linkedin: "LinkedIn profil",
-    rights: "Sva prava zadržana.",
+
+    headquarters: "Sedište",
+    branch: "Ogranak 1",
+
     belgrade: "Beograd",
+
+    technicalPreparation:
+      "Tehnička priprema",
+
+    rights:
+      "Sva prava zadržana.",
   },
 
   en: {
     tagline:
       "A reliable partner in the delivery of construction projects",
+
     home: "Home",
     about: "About us",
     projects: "Projects",
     contact: "Contact",
-    linkedin: "LinkedIn profile",
-    rights: "All rights reserved.",
-    belgrade: "Belgrade",
+
+    headquarters:
+      "Registered office",
+
+    branch:
+      "Branch 1",
+
+    belgrade:
+      "Belgrade",
+
+    technicalPreparation:
+      "Technical preparation",
+
+    rights:
+      "All rights reserved.",
   },
 };
 
@@ -40,16 +62,28 @@ function Footer() {
 
       <div className="footer-container">
 
+        {/* COMPANY */}
+
         <div className="footer-company">
-          <h2>MPM Construction Plus</h2>
-          <p>{t.tagline}</p>
+
+          <h2>
+            MPM Construction Plus
+          </h2>
+
+          <p>
+            {t.tagline}
+          </p>
+
         </div>
 
+
+        {/* NAVIGATION */}
 
         <nav
           className="footer-nav"
           aria-label="Footer navigation"
         >
+
           <Link to="/">
             {t.home}
           </Link>
@@ -65,14 +99,17 @@ function Footer() {
           <Link to="/kontakt">
             {t.contact}
           </Link>
+
         </nav>
 
 
-        {/* NOVI SAD */}
+        {/* SEDIŠTE */}
 
         <div className="footer-office">
 
-          <h3>Novi Sad</h3>
+          <h3>
+            {t.headquarters}
+          </h3>
 
           <a
             href="https://www.google.com/maps/search/?api=1&query=Bulevar+Slobodana+Jovanovica+15,+Novi+Sad,+Serbia"
@@ -80,25 +117,21 @@ function Footer() {
             rel="noopener noreferrer"
             className="footer-address"
           >
+            Novi Sad,
+            <br />
             Bulevar Slobodana Jovanovića 15
-          </a>
-
-          <a href="tel:+38169685607">
-            (+381) 069/685-607
-          </a>
-
-          <a href="mailto:office@mpms.rs">
-            office@mpms.rs
           </a>
 
         </div>
 
 
-        {/* BEOGRAD / BELGRADE */}
+        {/* OGRANAK 1 */}
 
-        <div className="footer-office">
+        <div className="footer-office footer-branch">
 
-          <h3>{t.belgrade}</h3>
+          <h3>
+            {t.branch}
+          </h3>
 
           <a
             href="https://www.google.com/maps/search/?api=1&query=Dr.+Ivana+Ribara+128a,+Beograd,+Serbia"
@@ -106,31 +139,38 @@ function Footer() {
             rel="noopener noreferrer"
             className="footer-address"
           >
+            {t.belgrade},
+            <br />
             Dr. Ivana Ribara 128a
           </a>
 
-          <a href="tel:+381113426525">
+
+          <a
+            href="tel:+381113426525"
+            className="footer-phone"
+          >
             011/342-6525
           </a>
 
-          <a href="mailto:office@mpms.rs">
-            office@mpms.rs
-          </a>
 
-        </div>
+          <div className="footer-technical">
 
+            <span>
+              {t.technicalPreparation}
+            </span>
 
-        {/* COMPANY LINKEDIN */}
+            <a href="tel:+38169685777">
+              069 685 777
+            </a>
 
-        <div className="footer-linkedin">
+          </div>
+
 
           <a
-            href="https://linkedin.com"
-            className="linkedin-btn"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:office@mpms.rs"
+            className="footer-email"
           >
-            {t.linkedin}
+            office@mpms.rs
           </a>
 
         </div>
@@ -138,26 +178,29 @@ function Footer() {
       </div>
 
 
-      {/* FOOTER BOTTOM */}
-<div className="footer-bottom">
+      {/* BOTTOM */}
 
-  <span>
-    © 2026 MPM Construction Plus. {t.rights}
-  </span>
+      <div className="footer-bottom">
 
-  <span className="footer-credit">
-    Powered by{" "}
+        <span className="footer-copyright">
+          © 2026 MPM Construction Plus. {t.rights}
+        </span>
 
-    <a
-      href="https://www.linkedin.com/in/ena-mihajlovic/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Ena Mihajlovic
-    </a>
-  </span>
+        <span className="footer-credit">
 
-</div>
+          Powered by{" "}
+
+          <a
+            href={AUTHOR_LINKEDIN}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ena Sirar
+          </a>
+
+        </span>
+
+      </div>
 
     </footer>
   );

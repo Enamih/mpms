@@ -208,7 +208,7 @@ const projects = {
       ],
       description: [
         "Kampus Epic Games / 3Lateral u Novom Sadu predstavlja jedan od najznačajnijih razvojnih projekata iz oblasti visokih tehnologija.",
-        "U okviru realizacije projekta izvedeni su radovi na obezbeđenju temeljne jame, izvođenju šipova, zidu zavese i nadglavnoj gredi, čime je obezbeđena sigurna realizacija početnih faza izgradnje.",
+        "U okviru realizacije projekta izvedeni su radovi na obezbeđenju temeljne jame-izvođenje šipova, zid zavese i naglavnih greda, čime je obezbeđena sigurna realizacija početnih faza izgradnje.",
       ],
     },
     en: {

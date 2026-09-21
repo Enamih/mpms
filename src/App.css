@@ -2324,7 +2324,7 @@ main {
   display: flex;
   align-items: center;
   overflow: hidden;
-  background-image: url("/inkluzija/img52.jpeg");
+  background-image: url("public/inkluzija/img21.jpeg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

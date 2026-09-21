@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useLanguage from "../hooks/useLanguage";
-
-const FORM_ENDPOINT =
-  "https://formsubmit.co/a10649e7ebf8d842ae62f433ded403d4";
 
 const initialFormData = {
   name: "",
@@ -10,6 +7,7 @@ const initialFormData = {
   phone: "",
   subject: "",
   message: "",
+  website: "",
 };
 
 const content = {
@@ -64,8 +62,8 @@ const content = {
     success:
       "Poruka je uspešno poslata.",
 
-    autoresponse:
-      "Vaša poruka je uspešno poslata kompaniji MPM Construction Plus. Hvala što ste nas kontaktirali. Odgovorićemo vam u najkraćem mogućem roku.",
+    sendError:
+      "Došlo je do greške prilikom slanja poruke. Pokušajte ponovo.",
 
     errors: {
       nameRequired:
@@ -108,7 +106,8 @@ const content = {
 
     contactLabel: "Contact",
 
-    headquarters: "Registered office",
+    headquarters:
+      "Registered office",
 
     branch: "Branch 1",
 
@@ -148,8 +147,8 @@ const content = {
     success:
       "Message sent successfully.",
 
-    autoresponse:
-      "Your message has been successfully sent to MPM Construction Plus. Thank you for contacting us. We will get back to you as soon as possible.",
+    sendError:
+      "There was an error sending your message. Please try again.",
 
     errors: {
       nameRequired:
@@ -187,11 +186,6 @@ function Contact() {
 
   const t = content[language];
 
-  const sentFromRedirect =
-    new URLSearchParams(
-      window.location.search
-    ).get("sent") === "1";
-
   const [formData, setFormData] =
     useState(initialFormData);
 
@@ -201,21 +195,12 @@ function Contact() {
   const [
     submitStatus,
     setSubmitStatus,
-  ] = useState(
-    sentFromRedirect
-      ? "success"
-      : "idle"
-  );
+  ] = useState("idle");
 
-  useEffect(() => {
-    if (sentFromRedirect) {
-      window.history.replaceState(
-        {},
-        document.title,
-        window.location.pathname
-      );
-    }
-  }, [sentFromRedirect]);
+
+  /* =======================================================
+     VALIDACIJA
+  ======================================================= */
 
   const validateForm = () => {
     const newErrors = {};
@@ -230,6 +215,7 @@ function Contact() {
         "nameShort";
     }
 
+
     if (!formData.email.trim()) {
       newErrors.email =
         "emailRequired";
@@ -242,6 +228,7 @@ function Contact() {
         "emailInvalid";
     }
 
+
     if (
       formData.phone.trim() &&
       !/^[0-9+\s/-]{6,20}$/.test(
@@ -251,6 +238,7 @@ function Contact() {
       newErrors.phone =
         "phoneInvalid";
     }
+
 
     if (!formData.subject.trim()) {
       newErrors.subject =
@@ -263,6 +251,7 @@ function Contact() {
         "subjectShort";
     }
 
+
     if (!formData.message.trim()) {
       newErrors.message =
         "messageRequired";
@@ -274,8 +263,14 @@ function Contact() {
         "messageShort";
     }
 
+
     return newErrors;
   };
+
+
+  /* =======================================================
+     PROMENA POLJA
+  ======================================================= */
 
   const handleChange = (event) => {
     const { name, value } =
@@ -296,13 +291,21 @@ function Contact() {
     );
 
     if (
-      submitStatus === "success"
+      submitStatus === "success" ||
+      submitStatus === "error"
     ) {
       setSubmitStatus("idle");
     }
   };
 
-  const handleSubmit = (event) => {
+
+  /* =======================================================
+     SLANJE FORME
+  ======================================================= */
+
+  const handleSubmit = async (
+    event
+  ) => {
     event.preventDefault();
 
     const validationErrors =
@@ -322,20 +325,85 @@ function Contact() {
       return;
     }
 
+
     setSubmitStatus("sending");
 
-    event.currentTarget.submit();
+
+    try {
+      const response =
+        await fetch(
+          "/api/contact.php",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            body: JSON.stringify({
+              ...formData,
+              language,
+            }),
+          }
+        );
+
+
+      const responseText =
+        await response.text();
+
+      let result = {};
+
+
+      try {
+        result =
+          JSON.parse(
+            responseText
+          );
+      } catch {
+        result = {};
+      }
+
+
+      if (
+        !response.ok ||
+        !result.success
+      ) {
+        throw new Error(
+          result.message ||
+          "Email send failed"
+        );
+      }
+
+
+      setFormData(
+        initialFormData
+      );
+
+      setErrors({});
+
+      setSubmitStatus(
+        "success"
+      );
+    } catch (error) {
+      console.error(
+        "Contact form error:",
+        error
+      );
+
+      setSubmitStatus(
+        "error"
+      );
+    }
   };
 
-  const nextUrl =
-    `${window.location.origin}/kontakt?sent=1`;
 
   return (
     <main className="contact-new-page">
 
-      {/* =========================
+      {/* =====================================================
           HERO
-      ========================== */}
+      ===================================================== */}
 
       <section className="contact-new-hero">
 
@@ -360,9 +428,9 @@ function Contact() {
       </section>
 
 
-      {/* =========================
+      {/* =====================================================
           KONTAKT
-      ========================== */}
+      ===================================================== */}
 
       <section className="contact-new-main">
 
@@ -398,9 +466,7 @@ function Contact() {
                 rel="noopener noreferrer"
                 className="contact-new-address"
               >
-                Novi Sad,
-                Bulevar Slobodana
-                Jovanovića 15
+                Novi Sad, Bulevar Slobodana Jovanovića 15
               </a>
 
             </div>
@@ -408,7 +474,7 @@ function Contact() {
           </article>
 
 
-          {/* OGRANAK BEOGRAD */}
+          {/* OGRANAK 1 */}
 
           <article className="contact-new-office-card">
 
@@ -428,9 +494,7 @@ function Contact() {
                 rel="noopener noreferrer"
                 className="contact-new-address"
               >
-                {t.belgrade},
-                {" "}
-                Dr. Ivana Ribara 128a
+                {t.belgrade}, Dr. Ivana Ribara 128a
               </a>
 
 
@@ -470,59 +534,35 @@ function Contact() {
         </div>
 
 
-        {/* =========================
+        {/* =====================================================
             FORMA
-        ========================== */}
+        ===================================================== */}
 
         <form
           className="contact-new-form"
-          action={FORM_ENDPOINT}
-          method="POST"
           onSubmit={handleSubmit}
           noValidate
         >
 
-          <input
-            type="hidden"
-            name="_next"
-            value={nextUrl}
-          />
-
-          <input
-            type="hidden"
-            name="_template"
-            value="table"
-          />
-
-          <input
-            type="hidden"
-            name="_autoresponse"
-            value={t.autoresponse}
-          />
-
-          <input
-            type="hidden"
-            name="_replyto"
-            value={formData.email}
-          />
-
-          <input
-            type="hidden"
-            name="_subject"
-            value={`MPM website - ${
-              formData.subject.trim() ||
-              "Kontakt"
-            }`}
-          />
+          {/* HONEYPOT */}
 
           <input
             type="text"
-            name="_honey"
+            name="website"
+            value={
+              formData.website
+            }
+            onChange={
+              handleChange
+            }
             className="contact-new-honeypot"
             tabIndex="-1"
             autoComplete="off"
+            aria-hidden="true"
           />
 
+
+          {/* IME + EMAIL */}
 
           <div className="contact-new-form-row">
 
@@ -598,6 +638,8 @@ function Contact() {
           </div>
 
 
+          {/* TELEFON + NASLOV */}
+
           <div className="contact-new-form-row">
 
             <div className="contact-new-form-group">
@@ -669,6 +711,8 @@ function Contact() {
           </div>
 
 
+          {/* PORUKA */}
+
           <div className="contact-new-form-group">
 
             <label htmlFor="message">
@@ -703,6 +747,8 @@ function Contact() {
           </div>
 
 
+          {/* SUBMIT */}
+
           <button
             type="submit"
             className="contact-new-submit"
@@ -718,6 +764,8 @@ function Contact() {
           </button>
 
 
+          {/* SUCCESS */}
+
           {submitStatus ===
             "success" && (
             <p
@@ -728,14 +776,27 @@ function Contact() {
             </p>
           )}
 
+
+          {/* ERROR */}
+
+          {submitStatus ===
+            "error" && (
+            <p
+              className="contact-new-error"
+              role="alert"
+            >
+              {t.sendError}
+            </p>
+          )}
+
         </form>
 
       </section>
 
 
-      {/* =========================
+      {/* =====================================================
           MAPA
-      ========================== */}
+      ===================================================== */}
 
       <section className="contact-new-location">
 
@@ -753,9 +814,7 @@ function Contact() {
           <div className="contact-new-map-card">
 
             <div className="contact-new-map-title">
-              Dr. Ivana Ribara 128a,
-              {" "}
-              {t.belgrade}
+              Dr. Ivana Ribara 128a, {t.belgrade}
             </div>
 
 
