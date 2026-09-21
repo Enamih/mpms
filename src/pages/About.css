@@ -2103,7 +2103,7 @@
 
 @media (max-width: 700px) {
   .about-gallery-lightbox > .about-gallery-close {
-    top: 68px !important;
+    top: 78px !important;
     right: 12px !important;
 
     width: 44px !important;
@@ -2120,7 +2120,7 @@
 
 @media (max-width: 420px) {
   .about-gallery-lightbox > .about-gallery-close {
-    top: 64px !important;
+    top: 74px !important;
     right: 10px !important;
 
     width: 42px !important;

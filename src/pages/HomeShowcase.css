@@ -1441,7 +1441,7 @@
 
 @media (max-width: 420px) {
   .about-gallery-lightbox > .about-gallery-close {
-    top: 64px !important;
+    top: 74px !important;
     right: 10px !important;
 
     width: 42px !important;
