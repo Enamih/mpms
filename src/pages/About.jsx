@@ -296,7 +296,11 @@ function About() {
   };
 
   return (
-    <main className="about-page">
+    <main
+  className={`about-page ${
+    activeImage !== null ? "lightbox-open" : ""
+  }`}
+>
 
       {/* =====================================================
           HERO

@@ -455,7 +455,11 @@ function Home() {
 
 
   return (
-    <main className="home-page">
+    <main
+  className={`home-page ${
+    activeImage !== null ? "lightbox-open" : ""
+  }`}
+>
 
       {/* ===================================================
           HERO

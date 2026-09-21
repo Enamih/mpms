@@ -2060,6 +2060,19 @@ main {
   }
 }
 
+/* =========================================================
+   LIGHTBOX BACKGROUND BLUR - HOME + ABOUT
+========================================================= */
+
+.home-page.lightbox-open > section,
+.about-page.lightbox-open > section {
+  filter: blur(8px);
+}
+
+.home-page > section,
+.about-page > section {
+  transition: filter 0.22s ease;
+}
 
 /* PROJECTS */
 
