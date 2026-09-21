@@ -1738,3 +1738,12 @@ body.project-lightbox-open
   transition:
     filter 0.22s ease;
 }
+/* =========================================================
+   MOBILE GALLERY SWIPE
+========================================================= */
+
+@media (max-width: 700px) {
+  .project-slider {
+    touch-action: pan-y;
+  }
+}

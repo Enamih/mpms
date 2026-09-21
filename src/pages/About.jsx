@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useLanguage from "../hooks/useLanguage";
+import "./About.css";
 
 const ABOUT_GALLERY = [
   {
@@ -547,18 +548,6 @@ function About() {
           aria-label="Galerija fotografija"
         >
 
-          {/* CLOSE */}
-
-          <button
-            type="button"
-            className="about-gallery-close"
-            onClick={closeLightbox}
-            aria-label="Zatvori galeriju"
-          >
-            ×
-          </button>
-
-
           {/* LEFT */}
 
           <button
@@ -585,6 +574,18 @@ function About() {
               event.stopPropagation()
             }
           >
+
+            <button
+              type="button"
+              className="gallery-image-close"
+              onClick={(event) => {
+                event.stopPropagation();
+                closeLightbox();
+              }}
+              aria-label="Zatvori galeriju"
+            >
+              ×
+            </button>
 
             <img
               key={ABOUT_GALLERY[activeImage].src}

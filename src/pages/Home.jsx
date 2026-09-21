@@ -817,20 +817,6 @@ function Home() {
           aria-label="Galerija fotografija"
         >
 
-          {/* CLOSE */}
-
-          <button
-            type="button"
-            className="about-gallery-close"
-            onClick={
-              closeLightbox
-            }
-            aria-label="Zatvori galeriju"
-          >
-            ×
-          </button>
-
-
           {/* LEFT ARROW */}
 
           <button
@@ -858,6 +844,18 @@ function Home() {
               event.stopPropagation()
             }
           >
+
+            <button
+              type="button"
+              className="gallery-image-close"
+              onClick={(event) => {
+                event.stopPropagation();
+                closeLightbox();
+              }}
+              aria-label="Zatvori galeriju"
+            >
+              ×
+            </button>
 
             <img
               key={
