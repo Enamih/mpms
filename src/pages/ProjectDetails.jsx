@@ -677,7 +677,11 @@ function ProjectDetails() {
   };
 
   return (
-    <main className="project-details-page">
+    <main
+  className={`project-details-page ${
+    activeImageIndex !== null ? "lightbox-open" : ""
+  }`}
+>
 
       <section
         className="project-hero-new"

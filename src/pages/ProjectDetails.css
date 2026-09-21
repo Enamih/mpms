@@ -996,7 +996,17 @@
   user-select: none;
 }
 
+/* =========================================================
+   LIGHTBOX BACKGROUND BLUR
+========================================================= */
 
+.project-details-page.lightbox-open > section {
+  filter: blur(8px);
+}
+
+.project-details-page > section {
+  transition: filter 0.22s ease;
+}
 /* X */
 
 .project-lightbox-close {
